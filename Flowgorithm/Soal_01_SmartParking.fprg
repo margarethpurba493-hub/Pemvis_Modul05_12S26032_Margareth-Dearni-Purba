@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Soal_01_SmartParking"/>
+        <attribute name="authors" value="marga"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-09 03:15:20 PM"/>
+        <attribute name="created" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMDk7MTA6MTY6NTIgQU07MjQ1MQ=="/>
+        <attribute name="edited" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMDk7MDM6MTU6MjAgUE07MjsyNTcx"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="jeniskendaraan" type="String" array="False" size=""/>
+            <declare name="durasijam" type="Integer" array="False" size=""/>
+            <declare name="punyavoucher" type="Boolean" array="False" size=""/>
+            <declare name="biayaawal, denda, totaltagihan, diskon, totalbayarakhir, dendainap" type="Real" array="False" size=""/>
+            <output expression="&quot;berapa durasi waktunya?&quot;" newline="True"/>
+            <input variable="durasijam"/>
+            <output expression="&quot;apa jenis kendaraannya?&quot;" newline="True"/>
+            <input variable="jeniskendaraan"/>
+            <output expression="&quot;apakah memiliki voucher?&quot;" newline="True"/>
+            <input variable="punyavoucher"/>
+            <if expression="durasijam &gt;0">
+                <then>
+                    <if expression="jeniskendaraan == &quot;S&quot; OR jeniskendaraan == &quot;M&quot;">
+                        <then>
+                            <if expression="jeniskendaraan == &quot;S&quot;">
+                                <then>
+                                    <if expression="durasijam &lt;=2">
+                                        <then>
+                                            <assign variable="biayaawal" expression="2000"/>
+                                        </then>
+                                        <else>
+                                            <assign variable="biayaawal" expression="2000+ (durasijam-2)*1000"/>
+                                        </else>
+                                    </if>
+                                </then>
+                                <else>
+                                    <if expression="durasijam &lt;=2">
+                                        <then>
+                                            <assign variable="biayaawal" expression="5000"/>
+                                        </then>
+                                        <else>
+                                            <assign variable="biayaawal" expression="5000+ (durasijam-2)*3000"/>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </then>
+                        <else/>
+                    </if>
+                    <if expression="durasijam&gt;12">
+                        <then>
+                            <assign variable="dendainap" expression="25000"/>
+                        </then>
+                        <else>
+                            <assign variable="dendainap" expression="0"/>
+                        </else>
+                    </if>
+                    <assign variable="totaltagihan" expression="biayaawal+dendainap"/>
+                    <if expression="punyavoucher == True">
+                        <then>
+                            <assign variable="diskon" expression="totaltagihan*0.10"/>
+                        </then>
+                        <else>
+                            <assign variable="diskon" expression="0"/>
+                        </else>
+                    </if>
+                    <assign variable="totalbayarakhir" expression="totaltagihan-diskon"/>
+                    <output expression="&quot;Biaya awal: Rp&quot; &amp; biayaawal" newline="True"/>
+                    <output expression="&quot;Denda inapnya adalah: Rp&quot; &amp; dendainap" newline="True"/>
+                    <output expression="&quot;Total diskonnya adalah : Rp&quot; &amp; diskon" newline="True"/>
+                    <output expression="&quot;Total bayar di akhir adalah : Rp&quot; &amp; totalbayarakhir" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;durasi parkirnya tidak valid&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
